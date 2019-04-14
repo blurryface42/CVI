@@ -1,5 +1,3 @@
-# CVI1
-
 import cv2
 import numpy as np
 
@@ -39,10 +37,11 @@ def hough_lines(img, rho, theta, threshold, min_line_len, max_line_gap):
 
 
 image = cv2.imread("D:\StraightRoad.jpeg")
-# Convert to grayscale
+# Convert to grayscale for identification of white
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-# Convert to HSV wrt yellow lane lines and white lane lines separately and combine the two to form a mask
+# Convert to HSV for easier identification of yellow
 img_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+#Identify yellow and white; then create a mask
 lower_yellow = np.array([20, 100, 100], dtype='uint8')
 upper_yellow = np.array([30, 255, 255], dtype='uint8')
 mask_yellow = cv2.inRange(img_hsv, lower_yellow, upper_yellow)
